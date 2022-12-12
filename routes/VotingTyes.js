@@ -64,7 +64,7 @@ router.put('/:id', getOne, async (req, res) => {
     }
 
     await res.foundVotingType.save();
-    res.status(200);
+    res.status(200).json({});
   } catch (error) {
     res.status(500).send(error.messaage);
   }
