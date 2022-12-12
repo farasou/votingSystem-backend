@@ -33,16 +33,15 @@ router.get('/:id', getOne, (req, res) => {
 
 router.post('/', async (req, res) => {
   const newObject = new VotingType({
-    id: req.body.sku,
     name: req.body.name,
-    date_added: req.body.date_added,
-    priority: req.body.price,
-    parameter: req.body.quantity,
-    content: req.body.description
+    date_added: Date.now(),
+    priority: req.body.priority,
+    parameter: req.body.parameter,
+    content: req.body.content
   });
 
   try {
-    const res = await newObject.save();
+    await newObject.save();
     res.status(200).json(newObject);
   } catch (error) {
     res.status(500).send(error.messaage);
@@ -51,9 +50,6 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', getOne, async (req, res) => {
   try {
-    if (req.body.id) {
-      res.foundVotingType.id = req.body.id;
-    }
     if (req.body.name) {
       res.foundVotingType.name = req.body.name;
     }
@@ -67,8 +63,8 @@ router.put('/:id', getOne, async (req, res) => {
       res.foundVotingType.content = req.body.content;
     }
 
-    const res = await res.foundVotingType.save();
-    res.status(200).json(res);
+    await res.foundVotingType.save();
+    res.status(200);
   } catch (error) {
     res.status(500).send(error.messaage);
   }
@@ -76,8 +72,8 @@ router.put('/:id', getOne, async (req, res) => {
 
 router.delete('/:id', getOne, async (req, res) => {
   try {
-    const res = await res.foundVotingType.remove();
-    res.status(200).json(res);
+    await res.foundVotingType.remove();
+    res.status(200);
   } catch (error) {
     res.status(500).json(error.messaage);
   }

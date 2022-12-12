@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const VotingTypeSchema = new mongoose.Schema({
-    'id': {
-        type: Number,
-        required: true,
-        default: [new Date()]
-    },
     'name': {
         type: String,
         required: true
