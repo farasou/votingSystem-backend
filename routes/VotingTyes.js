@@ -73,7 +73,7 @@ router.put('/:id', getOne, async (req, res) => {
 router.delete('/:id', getOne, async (req, res) => {
   try {
     await res.foundVotingType.remove();
-    res.status(200);
+    res.status(200).json({});
   } catch (error) {
     res.status(500).json(error.messaage);
   }
